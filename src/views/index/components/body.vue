@@ -33,7 +33,10 @@ export default {
     const linesError = ref(false);
     const linesFinished = ref(false);
 
-    const fetchLine = (id, type) => fetch(`https://api.czjtkx.com/CzBus/V4.1/Line/GetList?Line_Id=${id}&Line_Type=${type}`)
+    const fetchLine = (id, type) => fetch('/api/proxy', {
+      body: `http://api.czjtkx.com/CzBus/V4.1/Line/GetList?Line_Id=${id}&Line_Type=${type}`,
+      method: 'POST',
+    })
       .then((res) => res.json())
       .then((json) => {
         if (json.resCode === 10000) {
